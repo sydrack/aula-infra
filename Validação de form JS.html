@@ -1,0 +1,210 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script>
+            
+            function validaForm(){
+				var nomeCerto = checaNome();
+				var estaBom = true;
+                
+				if(nomeCerto == false){
+					estaBom = false;
+				}
+                
+				if(checaDataNull() == true){
+					if(checaDatas() == false){
+						estaBom = false;
+					}
+				}
+                else{
+					alert("data vazia");
+					estaBom = false;
+				}
+                
+                if(checaEmail() == false){
+                    alert("Email errado")
+                    estaBom == false;
+                }
+                if(checaSite() == false){
+                    alert("Site errado")
+                    estaBom == false;
+                }
+                
+				return estaBom;      
+            }
+                
+            function checaNome(){
+                var name = document.forms["form"]["nome"].value;
+                var sobrenome = document.forms["form"]["nome"].value;
+                if(name.length < 3 || sobrenome.length < 3){
+                    var erro = document.forms["form"]["nome"].setAttribute("class","erro");
+                    var erro = document.forms["form"]["nome"].setAttribute("placeholder","Campo Incorreto!");
+                    var erro = document.forms["form"]["sobrenome"].setAttribute("class","erro");
+                    var erro = document.forms["form"]["sobrenome"].setAttribute("placeholder","");
+                    
+                    return false;
+                }
+                return true;
+            }
+                
+                
+            function checaDatas(){
+                        var data_1 = document.forms["form"]["data1"].value;
+                        var data_2 = document.forms["form"]["data2"].value;
+						
+                        var Compara01 = parseInt(data_1.split("/")[2].toString() + data_1.split("/")[1].toString() + data_1.split("/")[0].toString());
+                        var Compara02 = parseInt(data_2.split("/")[2].toString() + data_2.split("/")[1].toString() + data_2.split("/")[0].toString());
+
+                        if (Compara01 > Compara02) {
+                           alert("Data inicial não pode ser maior que a data final");
+                           return false;
+                        }
+                        else {
+                            return true
+                        }
+                     }
+            
+            function checaDataNull(){
+                var data_1 = document.forms["form"]["data1"].value;
+                var data_2 = document.forms["form"]["data2"].value;
+                
+                if(data_1 == "" || data_2 == ""){
+                    if(data_1 == ""){
+                        var erro = document.forms["form"]["data1"].setAttribute("class","erro");
+                        var erro = document.forms["form"]["data1"].setAttribute("placeholder","Campo Incorreto!");
+                    }
+                    
+                    if(data_2 == ""){
+                        var erro = document.forms["form"]["data2"].setAttribute("class","erro");
+                        var erro = document.forms["form"]["data2"].setAttribute("placeholder","Campo Incorreto!");
+                    }
+                    return false;
+                }
+				return true;
+            }
+            
+            function checaEmail(){
+                var email = document.forms["form"]["email"].value;
+                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if(re.test(email) == false){
+                    var erro = document.forms["form"]["email"].setAttribute("class","erro");
+                    var erro = document.forms["form"]["email"].setAttribute("placeholder","Campo Incorreto!");
+                }
+                return re.test(email);
+            }
+            
+            function checaSite(){
+                var url = document.forms["form"]["website"].value;
+                var r = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+                
+                if(r.test(url) == false){
+                    var erro = document.forms["form"]["website"].setAttribute("class","erro");
+                    var erro = document.forms["form"]["website"].setAttribute("placeholder","Campo Incorreto!");
+                }
+                
+               return r.test(url);
+            }
+
+            function formataData(campo, e){
+                var kC = (document.all) ? event.keyCode : e.keyCode;
+                var data = campo.value;
+                
+                
+                    if( kC!=8 && kC!=46 )
+                    {
+                        if( data.length==2 )
+                        {
+                            campo.value = data += '/';
+                        }
+                        else if( data.length==5 )
+                        {
+                            campo.value = data += '/';
+                        }
+                        else
+                            campo.value = data;
+                    }
+                }
+            
+                function apresentaOcultaAtividades(quemFoi){
+					if(quemFoi.value == "Centro-oeste"){
+						document.getElementById("atividade_programador").style.display = "none";
+						document.getElementById("atividade_dba").style.display = "none";
+					}else{
+						document.getElementById("atividade_programador").style.display = "inline";
+						document.getElementById("atividade_dba").style.display = "inline";
+						}
+                    
+					var atvs = document.getElementsByName("atividade[]");
+                    atvs[1].checked = false;
+                    atvs[3].checked = false;
+				}
+            
+                function checaAtv(obj){
+                    
+                    var atvs = document.getElementsByName("atividade[]");
+                    var atividades = 0
+                    for(i=0;i<atvs.length;i++){
+                        if(atvs[i].checked == true){
+                            atividades++
+                            
+                        }
+                        if(atividades > 3){
+                                obj.checked = false;
+                                
+                        }
+                        if(atividades < 1){
+                            
+                        }
+                    }
+                    
+                    
+                }
+                        
+                
+        
+        </script>
+        <style>
+            .erro{
+                border: 2px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <form name="form" method="post" action="valida.php" onsubmit="return validaForm()">
+        <fieldset>
+        <label>Nome: <input type="text" name="nome"></label>
+        <label>Sobrenome: <input type="text" name="sobrenome"></label><br><br>
+        <fieldset>
+            <legend>Periodo de disponibilidade</legend>
+            <label>Data inicial: <input type="text" maxlength="10" onkeypress="formataData(this, event)" name="data1"></label>
+            <label>Data final: <input type="text" maxlength="10" onkeypress="formataData(this, event)" name="data2"></label>
+        </fieldset><br>
+        <fieldset name="reg">
+            <legend>Principal região de atuação</legend>
+            <label><input type="radio" name="regiao" onclick="apresentaOcultaAtividades(this)" value="Sul">Sul</label>
+            <label><input type="radio" name="regiao" onclick="apresentaOcultaAtividades(this)" value="Sudeste">Sudeste</label>
+            <label><input type="radio" id="CO" onclick="apresentaOcultaAtividades(this)" name="regiao" value="Centro-oeste">Centro-oeste</label>
+            <label><input type="radio" name="regiao" onclick="apresentaOcultaAtividades(this)" value="Nordeste">Nordeste</label>
+            <label><input type="radio" name="regiao" onclick="apresentaOcultaAtividades(this)" value="Norte">Norte</label>
+        </fieldset><br>
+        <label>E-mail: <input type="text" name="email"></label>
+        <label>Website: <input type="text" name="website"></label><br><br>
+        <fieldset>
+            <legend>Atividades pretendidas</legend>
+            <label><input onclick="checaAtv(this)" type="checkbox" name="atividade[]" value="a">Analista</label>
+            <label class="proibidoCO" id="atividade_programador"><input onclick="checaAtv(this)" type="checkbox" name="atividade[]"  value="programador">Programador</label>
+            <label><input onclick="checaAtv(this)" type="checkbox" name="atividade[]">Web-designer</label>
+            <label class="proibidoCO" id="atividade_dba"><input onclick="checaAtv(this)" type="checkbox" name="atividade[]"  >DBA</label>
+            <label><input onclick="checaAtv(this)" type="checkbox" name="atividade[]">Administrador de rede</label>
+        </fieldset><br>
+        <fieldset>
+            <legend>Ações</legend>
+            <input type="textarea">
+        </fieldset><br>
+            <input type="submit" value="Enviar">
+            <input type="submit" value="Reiniciar">
+            <input type="submit" value="Ajuda">
+        </fieldset>
+        </form>
+    </body>
+</html>

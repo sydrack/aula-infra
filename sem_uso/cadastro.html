@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cinema News</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="estilo.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body bgcolor="#000000">
+        <div id="margem">
+            <div id="menu">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="series.html">Séries</a></li>
+                    <li><a href="">Filmes</a></li>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+                <center><img src="../imagens/cabecalho.png" alt="cabecalho" height="263" width="1200"></center>
+                
+            </div>
+            <br><br>
+            
+            
+            <form method="post" action="cadastro.php">
+                <fieldset>
+                <legend>Novo Usuário </legend>
+                <label for="nome">Nome:</label>
+                <input type="text" name="txtnome" id="txtnome" size="50" maxlength="200" required><br />
+                <label for="nascimento">Nascimento:</label>
+                <input type="date" name="data" id="data" required><br>
+                <label for="email">Email:</label>
+                <input type="text" name="txtemail" id="txtemail" size="50" maxlength="200" required><br />
+                <label for="usuario">Usuário:</label>
+                <input type="text" name="txtusuario" id="txtusuario" required><br />
+                <label for="senha">Senha:</label>
+                <input type="password" id="txtsenha" name="txtsenha" required><br />
+                <label for="senha2">Confirmar Senha:</label>
+                <input type="password" id="txtsenha2" name="txtsenha2" required><br />                               
+                </fieldset>
+                <input type="submit" name="cadastrar" value="Cadastrar">
+                <input type="reset" value="Cancelar"> 
+            </form>
+            
+            
+            <div id="rodape">
+            <h3> Cinema News vem para deixar você na íntegra de todas as notícias. </h3>            
+            </div>
+        </div>
+        
+    </body>
+</html>
