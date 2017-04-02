@@ -7,4 +7,4 @@ $db = pg_connect (DATABASE);
         while ($row = pg_fetch_assoc($consulta)) {
             echo $row;
         }
-<?php
+?>
