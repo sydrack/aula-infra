@@ -1,5 +1,5 @@
 <?php
-define("DATABASE", "host=sydrack.projetointegrador.org port=5432 dbname=sydrack_db user=sydrack password=977173");
+define("DATABASE", "host=ec2-107-20-149-243.compute-1.amazonaws.com port=5432 dbname=dcf4caiguneqro user=yesxaxtatmthcn password=1ce80a5a849d01c75ac8ef625c7ca1bb64f71fa3ec24d767e86748dc0da1b995");
 
     function validaFormPhp($nome,$data,$email,$usuario,$senha1,$senha2){
 
