@@ -20,7 +20,7 @@ require_once 'biblioteca.php';
 else{
 ?>
 <div class="form">
-    <form method="post" action="login" name="login" id="cadastro" onsubmit="return validaLogin()">
+    <form method="post" action="login.php" name="login" id="cadastro" onsubmit="return validaLogin()">
                 <fieldset>
                 
                 <legend>Login </legend>
